@@ -19,8 +19,9 @@ const introBeats = [
   },
   {
     eyebrow: "THE HUMAN GAP",
-    title: "The machine isn’t the problem.",
-    copy: "A few move faster. Most were never prepared to control this much power.",
+    title:
+      "A few move faster. Most were never prepared to control this much power.",
+    copy: "The machine isn’t the problem.",
     image: "/assets/race-car-crashes.webp",
     alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
   },
