@@ -258,7 +258,7 @@ export function DiscoveryExperience() {
             [
               "01",
               "Understand the driver",
-              "Understand how each driver thinks with HermanCQI, our patent-pending visual assessment designed to reveal individual thinking and communication preferences.",
+              "Use HermanCQI—a patent-pending, visual, neuroscience-informed online assessment—to understand how each driver thinks.",
             ],
             ["02", "Read the road", "Recognize the task, context, constraints, and risk before the model acts."],
             ["03", "Translate intent", "Render a task-aligned instruction without replacing the person’s objective."],
