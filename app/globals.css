@@ -63,25 +63,14 @@ button {
   width: 108%;
   height: 108%;
   object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
   transition: opacity 1.15s ease;
 }
 
-.cinema-start {
-  animation: cinemaDrift 15s ease-out both;
-}
-
-.cinema-start.is-hidden {
-  opacity: 0;
-}
-
-.cinema-finish {
-  opacity: 0;
-  transform: scale(1.06);
-}
-
-.cinema-finish.is-visible {
+.cinema-image.is-visible {
   opacity: 1;
-  animation: finishReveal 4.6s ease-out both;
+  animation: cinemaDrift 4.4s ease-out both;
 }
 
 .cinema-overlay {
@@ -171,10 +160,10 @@ button {
 
 @keyframes cinemaDrift {
   from {
-    transform: scale(1.02) translate3d(1%, 0, 0);
+    transform: scale(1.06) translate3d(0.8%, 0, 0);
   }
   to {
-    transform: scale(1.1) translate3d(-1.5%, -0.8%, 0);
+    transform: scale(1.11) translate3d(-0.8%, -0.4%, 0);
   }
 }
 
@@ -186,15 +175,6 @@ button {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes finishReveal {
-  from {
-    transform: scale(1.1) translate3d(1%, 0, 0);
-  }
-  to {
-    transform: scale(1.04) translate3d(-0.5%, 0, 0);
   }
 }
 
@@ -227,8 +207,19 @@ button {
 }
 
 .site-header nav a:hover,
-.site-header nav a:focus-visible {
+.site-header nav a:focus-visible,
+.nav-replay:hover,
+.nav-replay:focus-visible {
   color: var(--white);
+}
+
+.nav-replay {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+  font: inherit;
+  cursor: pointer;
 }
 
 .site-header .nav-cta {

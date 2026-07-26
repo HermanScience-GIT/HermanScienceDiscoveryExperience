@@ -7,21 +7,29 @@ const introBeats = [
     eyebrow: "ACCESS CHANGES EVERYTHING",
     title: "Tomorrow, every speed limit disappears.",
     copy: "A delivery company replaces every van with a Formula-style race car.",
+    image: "/assets/race-car-start.png",
+    alt: "A delivery driver holding a package beside an unexpectedly powerful Formula-style race car",
   },
   {
     eyebrow: "POWER ARRIVES FIRST",
     title: "Every driver gets one hour of training.",
-    copy: "A few move faster. Most were never prepared to control this much power.",
+    copy: "A legendary champion points to the track. The drivers listen. But an hour cannot build mastery.",
+    image: "/assets/race-car-classroom.webp",
+    alt: "A diverse class of delivery drivers with helmets on their desks learning from a legendary racing champion",
   },
   {
     eyebrow: "THE HUMAN GAP",
     title: "The machine isn’t the problem.",
-    copy: "Power without proficiency creates waste, risk, and unpredictable results.",
+    copy: "A few move faster. Most were never prepared to control this much power.",
+    image: "/assets/race-car-crashes.webp",
+    alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
   },
   {
     eyebrow: "RIDE-ALONG INTELLIGENCE",
     title: "HermanScience rides with your workforce.",
     copy: "Personalized guidance helps every employee learn to direct AI while doing real work.",
+    image: "/assets/race-car-finish.png",
+    alt: "An employee driving a tandem Formula-style car with a guide riding behind",
   },
 ];
 
@@ -69,6 +77,10 @@ export function DiscoveryExperience() {
   const [introStage, setIntroStage] = useState(0);
 
   useEffect(() => {
+    if (!introOpen) {
+      return;
+    }
+
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -89,34 +101,38 @@ export function DiscoveryExperience() {
       window.clearInterval(stageTimer);
       window.clearTimeout(closeTimer);
     };
-  }, []);
+  }, [introOpen]);
 
   const closeIntro = () => setIntroOpen(false);
+  const replayIntro = () => {
+    setIntroStage(0);
+    setIntroOpen(true);
+  };
 
   return (
     <>
       {introOpen && (
         <section className="cinema" aria-label="HermanScience opening story">
-          <img
-            className={`cinema-image cinema-start ${
-              introStage === introBeats.length - 1 ? "is-hidden" : ""
-            }`}
-            src="/assets/race-car-start.png"
-            alt="A delivery driver holding a package beside an unexpectedly powerful Formula-style race car"
-          />
-          <img
-            className={`cinema-image cinema-finish ${
-              introStage === introBeats.length - 1 ? "is-visible" : ""
-            }`}
-            src="/assets/race-car-finish.png"
-            alt="An employee driving a tandem Formula-style car with a guide riding behind"
-          />
+          {introBeats.map((beat, index) => (
+            <img
+              key={beat.image}
+              className={`cinema-image ${
+                introStage === index ? "is-visible" : ""
+              }`}
+              src={beat.image}
+              alt={beat.alt}
+            />
+          ))}
           <div className="cinema-overlay" />
           <div className="cinema-grid" aria-hidden="true" />
           <button className="cinema-skip" onClick={closeIntro}>
             Skip opening
           </button>
-          <div className="cinema-copy" aria-live="polite">
+          <div
+            className="cinema-copy"
+            key={introStage}
+            aria-live="polite"
+          >
             <span>{introBeats[introStage].eyebrow}</span>
             <h1>{introBeats[introStage].title}</h1>
             <p>{introBeats[introStage].copy}</p>
@@ -146,6 +162,9 @@ export function DiscoveryExperience() {
             <a href="#approach">Approach</a>
             <a href="#evidence">Evidence</a>
             <a href="#experiences">Explore</a>
+            <button className="nav-replay" onClick={replayIntro}>
+              Replay opening
+            </button>
             <a className="nav-cta" href="#engage">
               HermanEngage
             </a>
