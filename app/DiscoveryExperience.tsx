@@ -98,7 +98,7 @@ export function DiscoveryExperience() {
       } else {
         setIntroOpen(false);
       }
-    }, 15000);
+    }, 10000);
 
     return () => window.clearTimeout(stageTimer);
   }, [introOpen, introStage, introTimerReset]);
