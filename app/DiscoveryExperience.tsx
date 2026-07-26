@@ -283,8 +283,8 @@ export function DiscoveryExperience() {
             <p>
               HermanScience experiments held task content and output structure
               constant while varying personality-authored request style. The
-              findings show measurable differences—and a practical opportunity
-              to improve alignment.
+              findings show substantial differences—and a compelling
+              opportunity to improve alignment.
             </p>
             <a className="text-link" href="#research">
               Read the methodology and limitations <span>↘</span>
