@@ -56,9 +56,10 @@ const products = [
 
 const research = [
   {
-    value: "28.3%",
-    label: "average recoverable quality lift",
-    detail: "Across 21 controlled experiments and seven task types.",
+    value: "72.8%",
+    label: "maximum observed recoverable lift",
+    detail:
+      "Observed in a recommendation experiment: 7.70 versus 4.45.",
   },
   {
     value: "1,890",
