@@ -95,8 +95,8 @@ export function DiscoveryExperience() {
       setIntroStage((current) =>
         current < introBeats.length - 1 ? current + 1 : current,
       );
-    }, 7200);
-    const closeTimer = window.setTimeout(() => setIntroOpen(false), 31950);
+    }, 15000);
+    const closeTimer = window.setTimeout(() => setIntroOpen(false), 60000);
 
     return () => {
       window.clearInterval(stageTimer);
