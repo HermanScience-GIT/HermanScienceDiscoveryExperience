@@ -77,6 +77,7 @@ const research = [
 export function DiscoveryExperience() {
   const [introOpen, setIntroOpen] = useState(true);
   const [introStage, setIntroStage] = useState(0);
+  const [introTimerReset, setIntroTimerReset] = useState(0);
 
   useEffect(() => {
     if (!introOpen) {
@@ -88,26 +89,28 @@ export function DiscoveryExperience() {
     ).matches;
 
     if (reducedMotion) {
-      setIntroStage(introBeats.length - 1);
       return;
     }
 
-    const stageTimer = window.setInterval(() => {
-      setIntroStage((current) =>
-        current < introBeats.length - 1 ? current + 1 : current,
-      );
+    const stageTimer = window.setTimeout(() => {
+      if (introStage < introBeats.length - 1) {
+        setIntroStage((current) => current + 1);
+      } else {
+        setIntroOpen(false);
+      }
     }, 15000);
-    const closeTimer = window.setTimeout(() => setIntroOpen(false), 60000);
 
-    return () => {
-      window.clearInterval(stageTimer);
-      window.clearTimeout(closeTimer);
-    };
-  }, [introOpen]);
+    return () => window.clearTimeout(stageTimer);
+  }, [introOpen, introStage, introTimerReset]);
 
   const closeIntro = () => setIntroOpen(false);
+  const showIntroStage = (stage: number) => {
+    setIntroStage(stage);
+    setIntroTimerReset((current) => current + 1);
+  };
   const replayIntro = () => {
     setIntroStage(0);
+    setIntroTimerReset((current) => current + 1);
     setIntroOpen(true);
   };
 
@@ -138,14 +141,27 @@ export function DiscoveryExperience() {
             <span>{introBeats[introStage].eyebrow}</span>
             <h1>{introBeats[introStage].title}</h1>
             <p>{introBeats[introStage].copy}</p>
-            <div className="cinema-progress" aria-hidden="true">
+            <nav
+              className="cinema-progress"
+              aria-label="Opening story slides"
+            >
               {introBeats.map((beat, index) => (
-                <i
+                <button
+                  type="button"
                   key={beat.eyebrow}
-                  className={index <= introStage ? "active" : ""}
+                  className={
+                    index === introStage
+                      ? "active"
+                      : index < introStage
+                        ? "complete"
+                        : ""
+                  }
+                  aria-current={index === introStage ? "step" : undefined}
+                  aria-label={`Show slide ${index + 1}: ${beat.eyebrow}`}
+                  onClick={() => showIntroStage(index)}
                 />
               ))}
-            </div>
+            </nav>
             {introStage === introBeats.length - 1 && (
               <button className="button button-primary" onClick={closeIntro}>
                 Explore HermanScience

@@ -146,16 +146,48 @@ button {
   margin-bottom: 28px;
 }
 
-.cinema-progress i {
-  display: block;
-  width: 25%;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.22);
-  transition: background 0.9s ease;
+.cinema-progress button {
+  position: relative;
+  flex: 1;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
-.cinema-progress i.active {
+.cinema-progress button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-50%);
+  transition:
+    height 0.2s ease,
+    background 0.9s ease;
+}
+
+.cinema-progress button.complete::after {
+  background: rgba(0, 174, 239, 0.5);
+}
+
+.cinema-progress button.active::after {
+  height: 5px;
   background: var(--cyan);
+}
+
+.cinema-progress button:hover::after,
+.cinema-progress button:focus-visible::after {
+  height: 7px;
+  background: var(--cyan-soft);
+}
+
+.cinema-progress button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
 }
 
 @keyframes cinemaDrift {
