@@ -70,7 +70,7 @@ button {
 
 .cinema-image.is-visible {
   opacity: 1;
-  animation: cinemaDrift 10s ease-out both;
+  animation: cinemaDrift 7s ease-out both;
 }
 
 .cinema-overlay {
@@ -104,6 +104,29 @@ button {
   color: var(--white);
   cursor: pointer;
   backdrop-filter: blur(12px);
+}
+
+.cinema-sound {
+  position: absolute;
+  z-index: 2;
+  right: 170px;
+  top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(2, 12, 24, 0.32);
+  color: var(--white);
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+.cinema-sound:hover,
+.cinema-sound:focus-visible {
+  border-color: var(--cyan-soft);
+  background: rgba(2, 12, 24, 0.58);
 }
 
 .cinema-copy {
@@ -1027,6 +1050,21 @@ footer p {
 
   .cinema-copy {
     margin-bottom: 7vh;
+  }
+
+  .cinema-skip {
+    right: 18px;
+    top: 18px;
+  }
+
+  .cinema-sound {
+    right: auto;
+    left: 18px;
+    top: 18px;
+  }
+
+  .cinema-sound span:last-child {
+    display: none;
   }
 
   .cinema-image {

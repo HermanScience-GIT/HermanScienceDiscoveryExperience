@@ -1,6 +1,129 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const INTRO_STAGE_DURATION = 7000;
+
+type SoundscapeNode = AudioScheduledSourceNode | AudioNode;
+
+function stopSoundscape(nodes: SoundscapeNode[]) {
+  nodes.forEach((node) => {
+    if ("stop" in node) {
+      try {
+        node.stop();
+      } catch {
+        // The source may already have stopped naturally.
+      }
+    }
+    node.disconnect();
+  });
+  nodes.length = 0;
+}
+
+function scheduleStageSound(
+  context: AudioContext,
+  stage: number,
+  nodes: SoundscapeNode[],
+) {
+  stopSoundscape(nodes);
+
+  const now = context.currentTime;
+  const end = now + INTRO_STAGE_DURATION / 1000;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.13, now + 0.35);
+  master.gain.setValueAtTime(0.13, end - 0.6);
+  master.gain.exponentialRampToValueAtTime(0.0001, end);
+  master.connect(context.destination);
+  nodes.push(master);
+
+  const addTone = (
+    frequency: number,
+    volume: number,
+    type: OscillatorType,
+    startOffset = 0,
+    stopOffset = INTRO_STAGE_DURATION / 1000,
+  ) => {
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(frequency, now + startOffset);
+    gain.gain.setValueAtTime(volume, now + startOffset);
+    oscillator.connect(gain);
+    gain.connect(master);
+    oscillator.start(now + startOffset);
+    oscillator.stop(now + stopOffset);
+    nodes.push(oscillator, gain);
+    return oscillator;
+  };
+
+  const addChime = (
+    frequency: number,
+    startOffset: number,
+    duration = 0.75,
+  ) => {
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(frequency, now + startOffset);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      frequency * 1.18,
+      now + startOffset + duration,
+    );
+    gain.gain.setValueAtTime(0.0001, now + startOffset);
+    gain.gain.exponentialRampToValueAtTime(0.26, now + startOffset + 0.05);
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + startOffset + duration,
+    );
+    oscillator.connect(gain);
+    gain.connect(master);
+    oscillator.start(now + startOffset);
+    oscillator.stop(now + startOffset + duration);
+    nodes.push(oscillator, gain);
+  };
+
+  if (stage === 0) {
+    const engine = addTone(54, 0.42, "sawtooth");
+    engine.frequency.exponentialRampToValueAtTime(72, end);
+    addTone(108, 0.1, "triangle");
+  } else if (stage === 1) {
+    addTone(146, 0.16, "sine");
+    addTone(219, 0.07, "triangle");
+    addChime(392, 0.45);
+    addChime(494, 3.5);
+  } else if (stage === 2) {
+    const tension = addTone(48, 0.34, "sawtooth");
+    tension.frequency.exponentialRampToValueAtTime(38, end);
+    addTone(76, 0.12, "triangle");
+
+    const noiseLength = Math.floor(context.sampleRate * 0.7);
+    const noiseBuffer = context.createBuffer(
+      1,
+      noiseLength,
+      context.sampleRate,
+    );
+    const noiseData = noiseBuffer.getChannelData(0);
+    for (let index = 0; index < noiseLength; index += 1) {
+      noiseData[index] = (Math.random() * 2 - 1) * (1 - index / noiseLength);
+    }
+    const noise = context.createBufferSource();
+    const noiseGain = context.createGain();
+    noise.buffer = noiseBuffer;
+    noiseGain.gain.setValueAtTime(0.32, now + 0.18);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.88);
+    noise.connect(noiseGain);
+    noiseGain.connect(master);
+    noise.start(now + 0.18);
+    nodes.push(noise, noiseGain);
+  } else {
+    addTone(110, 0.12, "sine");
+    addTone(165, 0.08, "triangle");
+    addChime(330, 0.35, 1.1);
+    addChime(440, 1.05, 1.2);
+    addChime(554, 1.8, 1.3);
+  }
+}
 
 const introBeats = [
   {
@@ -78,6 +201,9 @@ export function DiscoveryExperience() {
   const [introOpen, setIntroOpen] = useState(true);
   const [introStage, setIntroStage] = useState(0);
   const [introTimerReset, setIntroTimerReset] = useState(0);
+  const [soundEnabled, setSoundEnabled] = useState(false);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const soundscapeNodesRef = useRef<SoundscapeNode[]>([]);
 
   useEffect(() => {
     if (!introOpen) {
@@ -98,10 +224,42 @@ export function DiscoveryExperience() {
       } else {
         setIntroOpen(false);
       }
-    }, 10000);
+    }, INTRO_STAGE_DURATION);
 
     return () => window.clearTimeout(stageTimer);
   }, [introOpen, introStage, introTimerReset]);
+
+  useEffect(() => {
+    const context = audioContextRef.current;
+
+    if (!introOpen || !soundEnabled || !context) {
+      stopSoundscape(soundscapeNodesRef.current);
+      return;
+    }
+
+    scheduleStageSound(context, introStage, soundscapeNodesRef.current);
+    return () => stopSoundscape(soundscapeNodesRef.current);
+  }, [introOpen, introStage, introTimerReset, soundEnabled]);
+
+  useEffect(
+    () => () => {
+      stopSoundscape(soundscapeNodesRef.current);
+      void audioContextRef.current?.close();
+    },
+    [],
+  );
+
+  const toggleSound = async () => {
+    if (soundEnabled) {
+      setSoundEnabled(false);
+      return;
+    }
+
+    const context = audioContextRef.current ?? new AudioContext();
+    audioContextRef.current = context;
+    await context.resume();
+    setSoundEnabled(true);
+  };
 
   const closeIntro = () => setIntroOpen(false);
   const showIntroStage = (stage: number) => {
@@ -132,6 +290,16 @@ export function DiscoveryExperience() {
           <div className="cinema-grid" aria-hidden="true" />
           <button className="cinema-skip" onClick={closeIntro}>
             Skip opening
+          </button>
+          <button
+            className="cinema-sound"
+            type="button"
+            aria-label={soundEnabled ? "Turn sound off" : "Turn sound on"}
+            aria-pressed={soundEnabled}
+            onClick={toggleSound}
+          >
+            <span aria-hidden="true">{soundEnabled ? "🔊" : "🔇"}</span>
+            <span>{soundEnabled ? "Sound on" : "Sound off"}</span>
           </button>
           <div
             className="cinema-copy"
