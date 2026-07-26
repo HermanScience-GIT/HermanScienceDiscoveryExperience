@@ -262,7 +262,11 @@ export function DiscoveryExperience() {
             ],
             ["02", "Read the road", "Recognize the task, context, constraints, and risk before the model acts."],
             ["03", "Translate intent", "Render a task-aligned instruction without replacing the person’s objective."],
-            ["04", "Coach in motion", "Help the employee improve proficiency while completing real work."],
+            [
+              "04",
+              "Coach in motion",
+              "Help the employee improve their AI proficiency while completing real work.",
+            ],
           ].map(([number, title, copy]) => (
             <article className="process-step" key={number}>
               <span>{number}</span>
