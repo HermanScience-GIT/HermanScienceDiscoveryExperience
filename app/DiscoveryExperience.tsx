@@ -222,9 +222,10 @@ export function DiscoveryExperience() {
           </div>
           <div className="thesis-body">
             <p className="lead">
-              Models are powerful. The human interface is still generic.
-              Different people frame goals, uncertainty, context, and risk in
-              different ways—and the model responds differently.
+              Models are powerful. The human interface is still generic. People
+              are from Earth. AI is from Saturn. Different people frame goals,
+              uncertainty, context, and risk in different ways—and the model
+              responds differently.
             </p>
             <p>
               HermanScience adds a behavioral translation layer between people
