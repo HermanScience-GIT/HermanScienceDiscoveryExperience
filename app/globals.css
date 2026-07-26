@@ -633,6 +633,12 @@ button {
   letter-spacing: 0.12em;
 }
 
+.status-coming {
+  border-color: rgba(255, 211, 77, 0.65);
+  background: rgba(255, 211, 77, 0.12);
+  color: #ffe17d;
+}
+
 .engage-copy > p {
   max-width: 620px;
   color: rgba(255, 255, 255, 0.68);

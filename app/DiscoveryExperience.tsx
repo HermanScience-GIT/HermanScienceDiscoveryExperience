@@ -323,6 +323,7 @@ export function DiscoveryExperience() {
 
         <section className="engage section" id="engage">
           <div className="engage-copy">
+            <span className="status status-coming">COMING SOON</span>
             <span className="status">PRIVATE PREVIEW</span>
             <span className="kicker">HERMANENGAGE</span>
             <h2>Personalization that reaches beyond the prompt.</h2>
