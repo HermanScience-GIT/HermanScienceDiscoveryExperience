@@ -265,7 +265,7 @@ export function DiscoveryExperience() {
             [
               "04",
               "Coach in motion",
-              "Help the employee improve their AI proficiency while completing real work.",
+              "Help employees build trust in AI and become more effective—expanding what they can accomplish while completing real work.",
             ],
           ].map(([number, title, copy]) => (
             <article className="process-step" key={number}>
