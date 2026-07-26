@@ -106,29 +106,6 @@ button {
   backdrop-filter: blur(12px);
 }
 
-.cinema-sound {
-  position: absolute;
-  z-index: 2;
-  right: 170px;
-  top: 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
-  background: rgba(2, 12, 24, 0.32);
-  color: var(--white);
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-}
-
-.cinema-sound:hover,
-.cinema-sound:focus-visible {
-  border-color: var(--cyan-soft);
-  background: rgba(2, 12, 24, 0.58);
-}
-
 .cinema-copy {
   position: relative;
   z-index: 2;
@@ -1055,16 +1032,6 @@ footer p {
   .cinema-skip {
     right: 18px;
     top: 18px;
-  }
-
-  .cinema-sound {
-    right: auto;
-    left: 18px;
-    top: 18px;
-  }
-
-  .cinema-sound span:last-child {
-    display: none;
   }
 
   .cinema-image {
