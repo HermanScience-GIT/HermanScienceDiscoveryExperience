@@ -239,7 +239,11 @@ export function DiscoveryExperience() {
         <section className="process section">
           <div className="process-line" aria-hidden="true" />
           {[
-            ["01", "Understand the driver", "Build a CQI-informed profile of how the person communicates and works."],
+            [
+              "01",
+              "Understand the driver",
+              "Use the world’s only visual neuroscience-based online assessment tool (patent pending) to understand how the driver thinks.",
+            ],
             ["02", "Read the road", "Recognize the task, context, constraints, and risk before the model acts."],
             ["03", "Translate intent", "Render a task-aligned instruction without replacing the person’s objective."],
             ["04", "Coach in motion", "Help the employee improve proficiency while completing real work."],
