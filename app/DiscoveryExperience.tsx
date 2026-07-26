@@ -7,14 +7,14 @@ const introBeats = [
     eyebrow: "ACCESS CHANGES EVERYTHING",
     title: "Tomorrow, every speed limit disappears.",
     copy: "A delivery company replaces every van with a Formula-style race car.",
-    image: "/assets/race-car-start.png",
+    image: "assets/race-car-start.png",
     alt: "A delivery driver holding a package beside an unexpectedly powerful Formula-style race car",
   },
   {
     eyebrow: "POWER ARRIVES FIRST",
     title: "Every driver gets one hour of training.",
     copy: "A legendary champion points to the track. The drivers listen. But an hour cannot build mastery.",
-    image: "/assets/race-car-classroom-v2.webp",
+    image: "assets/race-car-classroom-v2.webp",
     alt: "A diverse class of delivery drivers with helmets on their desks learning from a legendary racing champion",
   },
   {
@@ -22,14 +22,14 @@ const introBeats = [
     title:
       "A few move faster. Most were never prepared to control this much power.",
     copy: "The machine isn’t the problem.",
-    image: "/assets/race-car-crashes.webp",
+    image: "assets/race-car-crashes.webp",
     alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
   },
   {
     eyebrow: "RIDE-ALONG INTELLIGENCE",
     title: "HermanScience rides with your workforce.",
     copy: "Personalized guidance helps every employee learn to direct AI while doing real work.",
-    image: "/assets/race-car-finish.png",
+    image: "assets/race-car-finish.png",
     alt: "An employee driving a tandem Formula-style car with a guide riding behind",
   },
 ];
@@ -174,7 +174,7 @@ export function DiscoveryExperience() {
       <main>
         <header className="site-header">
           <a className="brand" href="#top" aria-label="HermanScience home">
-            <img src="/assets/hermanscience-logo.png" alt="HermanScience" />
+            <img src="assets/hermanscience-logo.png" alt="HermanScience" />
           </a>
           <nav aria-label="Primary navigation">
             <a href="#approach">Approach</a>
@@ -192,7 +192,7 @@ export function DiscoveryExperience() {
         <section className="hero" id="top">
           <img
             className="hero-background"
-            src="/assets/race-car-finish.png"
+            src="assets/race-car-finish.png"
             alt=""
             aria-hidden="true"
           />
@@ -417,7 +417,7 @@ export function DiscoveryExperience() {
               quality when the underlying task and output contract are held
               constant.
             </p>
-            <a href="/research/llm-prompt-quality-report.pdf" target="_blank">
+            <a href="research/llm-prompt-quality-report.pdf" target="_blank">
               Read the full report ↗
             </a>
           </article>
@@ -428,7 +428,7 @@ export function DiscoveryExperience() {
               Examines token use, output quality, and quality-guarded
               optimization across personality-authored prompt styles.
             </p>
-            <a href="/research/llm-token-consumption-report.pdf" target="_blank">
+            <a href="research/llm-token-consumption-report.pdf" target="_blank">
               Read the full report ↗
             </a>
           </article>
@@ -457,7 +457,7 @@ export function DiscoveryExperience() {
         </section>
 
         <footer>
-          <img src="/assets/hermanscience-logo.png" alt="HermanScience" />
+          <img src="assets/hermanscience-logo.png" alt="HermanScience" />
           <p>Human intelligence for better AI performance.</p>
           <span>© 2026 HermanScience</span>
         </footer>
