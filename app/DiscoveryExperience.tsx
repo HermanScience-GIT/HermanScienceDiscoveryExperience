@@ -383,7 +383,7 @@ export function DiscoveryExperience() {
           <div className="section-number">01</div>
           <div className="section-heading">
             <span className="kicker">THE MISSING LAYER</span>
-            <h2>AI learned our language. It didn’t learn each of us.</h2>
+            <h2>AI learned our language. It didn’t learn how you think.</h2>
           </div>
           <div className="thesis-body">
             <p className="lead">
