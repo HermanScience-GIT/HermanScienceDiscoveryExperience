@@ -1215,6 +1215,17 @@ footer p {
     margin-bottom: 7vh;
   }
 
+  .cinema-crash-headline {
+    max-width: none;
+    font-size: clamp(1.72rem, 8.7vw, 2.4rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .cinema-crash-headline span {
+    white-space: nowrap;
+  }
+
   .cinema-skip {
     right: 18px;
     top: 18px;
