@@ -22,7 +22,7 @@ const introBeats = [
   {
     eyebrow: "THE HUMAN GAP",
     title:
-      "A few move faster. Most were never prepared to control this much power.",
+      "A few might deliver faster. But unprepared for that much power, most will crash.",
     copy: "The machine isn’t the problem.",
     image: "assets/race-car-crashes.webp",
     alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
