@@ -30,7 +30,7 @@ const introBeats = [
   {
     eyebrow: "RIDE-ALONG INTELLIGENCE",
     title: "HermanScience rides with your workforce.",
-    copy: "Personalized guidance helps every employee learn to direct AI while doing real work.",
+    copy: "Hyper-personalized guidance helps every employee learn to direct AI while doing real work.",
     image: "assets/race-car-finish-v5.png",
     alt: "An employee driving a tandem Formula-style car with a guide riding behind",
   },
