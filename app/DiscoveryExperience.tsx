@@ -306,8 +306,7 @@ export function DiscoveryExperience() {
               <p>
                 A typical marketing manager using AI for 15 hours a week could
                 become <strong>35% more productive</strong>, use{" "}
-                <strong>14% fewer tokens</strong>, and create{" "}
-                <strong>$20K more annual value</strong>.
+                <strong>14% fewer tokens</strong>.
               </p>
               <a
                 className="button evidence-example-cta"
