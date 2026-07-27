@@ -486,7 +486,8 @@ button {
   position: relative;
   display: grid;
   grid-template-columns: 0.78fr 1.22fr;
-  gap: clamp(42px, 8vw, 130px);
+  column-gap: clamp(42px, 8vw, 130px);
+  row-gap: 42px;
   overflow: hidden;
   background: var(--navy);
   color: var(--white);
@@ -559,6 +560,51 @@ button {
   color: rgba(255, 255, 255, 0.58);
   font-size: 0.88rem;
   line-height: 1.55;
+}
+
+.evidence-example {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: center;
+  padding: 28px 30px;
+  border: 1px solid rgba(97, 214, 255, 0.25);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(12px);
+}
+
+.evidence-example span {
+  color: var(--cyan-soft);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.15em;
+}
+
+.evidence-example p {
+  max-width: 760px;
+  margin: 10px 0 8px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  line-height: 1.5;
+}
+
+.evidence-example p strong {
+  color: var(--white);
+}
+
+.evidence-example small {
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.evidence-example-cta {
+  min-width: max-content;
+  background: var(--cyan);
+  color: var(--navy);
 }
 
 .evidence-note {
@@ -986,6 +1032,10 @@ footer p {
     margin-bottom: 18px;
   }
 
+  .evidence-example {
+    grid-column: 1;
+  }
+
   .product-card {
     min-height: auto;
     border-right: 0;
@@ -1032,6 +1082,16 @@ footer p {
   .cinema-skip {
     right: 18px;
     top: 18px;
+  }
+
+  .evidence-example {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px;
+  }
+
+  .evidence-example-cta {
+    width: 100%;
   }
 
   .cinema-image {
