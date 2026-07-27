@@ -65,7 +65,7 @@ const research = [
       "Observed across explanation experiments with task and output requirements held constant.",
   },
   {
-    value: "72.8%",
+    value: "73%",
     label: "maximum observed recoverable lift",
     detail:
       "Observed in a recommendation experiment: 7.70 versus 4.45.",
