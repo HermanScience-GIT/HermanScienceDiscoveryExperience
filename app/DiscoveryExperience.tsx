@@ -475,6 +475,10 @@ export function DiscoveryExperience() {
           <div className="section-heading">
             <span className="kicker">FROM INSIGHT TO ACTION</span>
             <h2>One intelligence layer. Multiple ways to apply it.</h2>
+            <p className="portfolio-positioning">
+              One model-agnostic intelligence layer that works across the AI
+              tools your organization chooses.
+            </p>
           </div>
           <div className="product-grid">
             {products.map((product) => (
