@@ -473,6 +473,14 @@ export function DiscoveryExperience() {
             >
               Replay the opening
             </button>
+            <a
+              className="button button-secondary"
+              href="https://hermanscience.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Visit HermanScience.com
+            </a>
           </div>
         </section>
 
