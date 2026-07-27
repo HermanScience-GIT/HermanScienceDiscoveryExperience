@@ -292,31 +292,33 @@ export function DiscoveryExperience() {
               Read the methodology and limitations <span>↘</span>
             </a>
           </div>
-          <div className="metric-grid">
-            {research.map((item) => (
-              <article className="metric" key={item.value}>
-                <strong>{item.value}</strong>
-                <h3>{item.label}</h3>
-                <p>{item.detail}</p>
-              </article>
-            ))}
+          <div className="evidence-results">
+            <div className="metric-grid">
+              {research.map((item) => (
+                <article className="metric" key={item.value}>
+                  <strong>{item.value}</strong>
+                  <h3>{item.label}</h3>
+                  <p>{item.detail}</p>
+                </article>
+              ))}
+            </div>
+            <aside className="evidence-example">
+              <p>
+                A typical marketing manager using AI for 15 hours a week could
+                become <strong>35% more productive</strong>, use{" "}
+                <strong>14% fewer tokens</strong>, and create{" "}
+                <strong>$20K more annual value</strong>.
+              </p>
+              <a
+                className="button evidence-example-cta"
+                href="https://gtmnow.github.io/hermanscience-prompt-cqi-roi-calculator/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Calculate your AI ROI ↗
+              </a>
+            </aside>
           </div>
-          <aside className="evidence-example">
-            <p>
-              A typical marketing manager using AI for 15 hours a week could
-              become <strong>35% more productive</strong>, use{" "}
-              <strong>14% fewer tokens</strong>, and create{" "}
-              <strong>$20K more annual value</strong>.
-            </p>
-            <a
-              className="button evidence-example-cta"
-              href="https://gtmnow.github.io/hermanscience-prompt-cqi-roi-calculator/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Calculate your AI ROI ↗
-            </a>
-          </aside>
           <p className="evidence-note">
             Experimental results describe the tested conditions; they are not
             universal performance guarantees.

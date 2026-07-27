@@ -527,12 +527,19 @@ button {
   font-weight: 750;
 }
 
-.metric-grid {
+.evidence-results {
   position: relative;
   z-index: 1;
+  grid-column: 2;
+  display: grid;
+  gap: 18px;
+  align-self: start;
+  margin-top: 48px;
+}
+
+.metric-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-self: center;
 }
 
 .metric {
@@ -563,9 +570,6 @@ button {
 }
 
 .evidence-example {
-  position: relative;
-  z-index: 1;
-  grid-column: 2;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 20px;
@@ -1022,7 +1026,12 @@ footer p {
   }
 
   .evidence-example {
+    grid-column: auto;
+  }
+
+  .evidence-results {
     grid-column: 1;
+    margin-top: 0;
   }
 
   .product-card {
