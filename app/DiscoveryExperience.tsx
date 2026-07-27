@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const INTRO_STAGE_DURATION = 7000;
 
@@ -80,6 +80,9 @@ export function DiscoveryExperience() {
   const [introOpen, setIntroOpen] = useState(true);
   const [introStage, setIntroStage] = useState(0);
   const [introTimerReset, setIntroTimerReset] = useState(0);
+  const [demoOpen, setDemoOpen] = useState(false);
+  const [demoEnded, setDemoEnded] = useState(false);
+  const demoVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!introOpen) {
@@ -105,6 +108,30 @@ export function DiscoveryExperience() {
     return () => window.clearTimeout(stageTimer);
   }, [introOpen, introStage, introTimerReset]);
 
+  useEffect(() => {
+    if (!demoOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        demoVideoRef.current?.pause();
+        setDemoOpen(false);
+        setDemoEnded(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [demoOpen]);
+
   const closeIntro = () => setIntroOpen(false);
   const showIntroStage = (stage: number) => {
     setIntroStage(stage);
@@ -114,6 +141,26 @@ export function DiscoveryExperience() {
     setIntroStage(0);
     setIntroTimerReset((current) => current + 1);
     setIntroOpen(true);
+  };
+  const openDemo = () => {
+    setDemoEnded(false);
+    setDemoOpen(true);
+  };
+  const closeDemo = () => {
+    demoVideoRef.current?.pause();
+    setDemoOpen(false);
+    setDemoEnded(false);
+  };
+  const replayDemo = () => {
+    const video = demoVideoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    setDemoEnded(false);
+    video.currentTime = 0;
+    void video.play();
   };
 
   return (
@@ -171,6 +218,73 @@ export function DiscoveryExperience() {
             )}
           </div>
         </section>
+      )}
+
+      {demoOpen && (
+        <div
+          className="demo-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="demo-lightbox-title"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              closeDemo();
+            }
+          }}
+        >
+          <div className="demo-lightbox-panel">
+            <div className="demo-lightbox-header">
+              <div>
+                <span>HERMANENGAGE</span>
+                <h2 id="demo-lightbox-title">See personalized engagement in action.</h2>
+              </div>
+              <button
+                className="demo-lightbox-close"
+                type="button"
+                aria-label="Close demo"
+                onClick={closeDemo}
+                autoFocus
+              >
+                ×
+              </button>
+            </div>
+            <div className="demo-video-frame">
+              <video
+                ref={demoVideoRef}
+                src="media/hermanengage-demo-720p.mp4"
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                onEnded={() => setDemoEnded(true)}
+              >
+                Your browser does not support embedded video.
+              </video>
+              {demoEnded && (
+                <div className="demo-complete">
+                  <span>DEMO COMPLETE</span>
+                  <h3>Want to see it again?</h3>
+                  <div>
+                    <button
+                      className="button button-primary"
+                      type="button"
+                      onClick={replayDemo}
+                    >
+                      Replay video
+                    </button>
+                    <button
+                      className="button button-secondary"
+                      type="button"
+                      onClick={closeDemo}
+                    >
+                      Return to site
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
 
       <main>
@@ -356,12 +470,21 @@ export function DiscoveryExperience() {
               <li>Personalize messages and content for the audience</li>
               <li>Turn engagement intelligence into repeatable workflows</li>
             </ul>
-            <a
-              className="button button-primary"
-              href="mailto:admin@hermanscience.com?subject=HermanEngage%20private%20preview"
-            >
-              Request preview access
-            </a>
+            <div className="engage-actions">
+              <button
+                className="button button-secondary"
+                type="button"
+                onClick={openDemo}
+              >
+                View the demo
+              </button>
+              <a
+                className="button button-primary"
+                href="mailto:admin@hermanscience.com?subject=HermanEngage%20private%20preview"
+              >
+                Request preview access
+              </a>
+            </div>
           </div>
           <div className="engage-visual" aria-label="Personalization flow">
             <div className="profile-orbit">
