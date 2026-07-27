@@ -139,6 +139,15 @@ button {
   color: var(--orange);
 }
 
+.cinema-crash-headline span {
+  display: block;
+}
+
+.cinema-crash-headline strong {
+  color: var(--orange);
+  font-weight: inherit;
+}
+
 .cinema-copy p {
   max-width: 610px;
   margin: 0 0 28px;

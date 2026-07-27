@@ -22,7 +22,7 @@ const introBeats = [
   {
     eyebrow: "THE HUMAN GAP",
     title:
-      "A few might deliver faster. But unprepared for that much power, most will crash.",
+      "A few deliver faster. Unprepared for that much power, most will crash.",
     copy: "This is how adopting AI is impacting most organizations.",
     image: "assets/race-car-crashes.webp",
     alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
@@ -190,10 +190,16 @@ export function DiscoveryExperience() {
             <span>{introBeats[introStage].eyebrow}</span>
             <h1
               className={
-                introStage === 0 ? "cinema-opening-question" : undefined
+                introStage === 0
+                  ? "cinema-opening-question"
+                  : introStage === 2
+                    ? "cinema-crash-headline"
+                    : undefined
               }
               aria-label={
-                introStage === 0 ? introBeats[introStage].title : undefined
+                introStage === 0 || introStage === 2
+                  ? introBeats[introStage].title
+                  : undefined
               }
             >
               {introStage === 0 ? (
@@ -201,6 +207,15 @@ export function DiscoveryExperience() {
                   <span>What if every</span>
                   <span className="cinema-title-accent">speed limit</span>
                   <span>disappeared?</span>
+                </>
+              ) : introStage === 2 ? (
+                <>
+                  <span>A few deliver faster.</span>
+                  <span>Unprepared for</span>
+                  <span>that much power,</span>
+                  <span>
+                    most will <strong>crash</strong>.
+                  </span>
                 </>
               ) : (
                 introBeats[introStage].title
