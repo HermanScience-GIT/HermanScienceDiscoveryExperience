@@ -452,7 +452,7 @@ export function DiscoveryExperience() {
             <aside className="evidence-example">
               <p>
                 A typical marketing manager using AI for 15 hours a week could
-                become <strong>35% more productive</strong>, use{" "}
+                become <strong>35% more productive</strong> and use{" "}
                 <strong>14% fewer tokens</strong>.
               </p>
               <a
