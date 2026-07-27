@@ -15,7 +15,7 @@ const introBeats = [
   {
     eyebrow: "POWER ARRIVES FIRST",
     title: "Every driver gets one hour of training.",
-    copy: "A legendary champion points to the track. The drivers listen. But an hour cannot build mastery.",
+    copy: "The company hires a legendary champion to train their drivers. The employees are confident that they are ready.",
     image: "assets/race-car-classroom-v2.webp",
     alt: "A diverse class of delivery drivers with helmets on their desks learning from a legendary racing champion",
   },
