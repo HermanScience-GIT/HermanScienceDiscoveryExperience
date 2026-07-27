@@ -188,7 +188,24 @@ export function DiscoveryExperience() {
             aria-live="polite"
           >
             <span>{introBeats[introStage].eyebrow}</span>
-            <h1>{introBeats[introStage].title}</h1>
+            <h1
+              className={
+                introStage === 0 ? "cinema-opening-question" : undefined
+              }
+              aria-label={
+                introStage === 0 ? introBeats[introStage].title : undefined
+              }
+            >
+              {introStage === 0 ? (
+                <>
+                  <span>What if every</span>
+                  <span className="cinema-title-accent">speed limit</span>
+                  <span>disappeared?</span>
+                </>
+              ) : (
+                introBeats[introStage].title
+              )}
+            </h1>
             <p>{introBeats[introStage].copy}</p>
             <nav
               className="cinema-progress"

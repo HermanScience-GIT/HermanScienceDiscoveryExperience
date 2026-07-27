@@ -131,6 +131,14 @@ button {
   letter-spacing: -0.055em;
 }
 
+.cinema-opening-question span {
+  display: block;
+}
+
+.cinema-opening-question .cinema-title-accent {
+  color: var(--orange);
+}
+
 .cinema-copy p {
   max-width: 610px;
   margin: 0 0 28px;
