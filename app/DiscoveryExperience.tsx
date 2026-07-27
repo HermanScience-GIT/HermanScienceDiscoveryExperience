@@ -6,7 +6,7 @@ const INTRO_STAGE_DURATION = 7000;
 
 const introBeats = [
   {
-    eyebrow: "ACCESS CHANGES EVERYTHING",
+    eyebrow: "SPEED CHANGES EVERYTHING",
     title: "What if every speed limit disappeared?",
     copy: "A delivery company replaces every van with a Formula-style race car.",
     image: "assets/race-car-start-v2.png",
