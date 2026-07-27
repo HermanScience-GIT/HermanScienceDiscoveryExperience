@@ -60,7 +60,7 @@ const products = [
 const research = [
   {
     value: "65%",
-    label: "largest observed task-level token-use spread",
+    label: "largest observed task-level token-use savings",
     detail:
       "Observed across explanation experiments with task and output requirements held constant.",
   },
