@@ -23,7 +23,7 @@ const introBeats = [
     eyebrow: "THE HUMAN GAP",
     title:
       "A few might deliver faster. But unprepared for that much power, most will crash.",
-    copy: "The machine isn’t the problem.",
+    copy: "This is how adopting AI is impacting most organizations.",
     image: "assets/race-car-crashes.webp",
     alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
   },
