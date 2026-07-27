@@ -22,7 +22,7 @@ const introBeats = [
   {
     eyebrow: "THE HUMAN GAP",
     title:
-      "A few deliver faster. Unprepared for that much power, most will crash.",
+      "A few deliver faster. But, unprepared for that much power, most will crash.",
     copy: "This is how adopting AI is impacting most organizations.",
     image: "assets/race-car-crashes.webp",
     alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
@@ -211,7 +211,7 @@ export function DiscoveryExperience() {
               ) : introStage === 2 ? (
                 <>
                   <span>A few deliver faster.</span>
-                  <span>Unprepared for</span>
+                  <span>But, unprepared for</span>
                   <span>that much power,</span>
                   <span>
                     most will <strong>crash</strong>.
