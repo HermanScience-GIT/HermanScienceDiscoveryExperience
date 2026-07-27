@@ -13,7 +13,7 @@ const introBeats = [
     alt: "A delivery driver holding a package beside an unexpectedly powerful Formula-style race car, with traditional delivery trucks behind him",
   },
   {
-    eyebrow: "POWER ARRIVES FIRST",
+    eyebrow: "ADOPTION SEEMS EASY",
     title: "Every driver gets one hour of training.",
     copy: "The company hires a legendary champion to train their drivers. The employees are confident that they are ready.",
     image: "assets/race-car-classroom-v2.webp",
