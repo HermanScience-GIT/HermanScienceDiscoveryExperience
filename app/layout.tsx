@@ -20,7 +20,22 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       "Explore how HermanScience personalizes human-AI interaction to improve quality, efficiency, and proficiency.",
     icons: {
-      icon: "/assets/hermanscience-logo.png",
+      icon: [
+        { url: "/favicon.ico", sizes: "64x64" },
+        {
+          url: "/assets/hermanscience-face-icon.png",
+          type: "image/png",
+          sizes: "256x256",
+        },
+      ],
+      shortcut: "/favicon.ico",
+      apple: [
+        {
+          url: "/apple-touch-icon.png",
+          type: "image/png",
+          sizes: "180x180",
+        },
+      ],
     },
     openGraph: {
       title: "HermanScience | Teach your workforce how to drive AI",
