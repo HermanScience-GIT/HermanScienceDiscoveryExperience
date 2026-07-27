@@ -16,7 +16,7 @@ const introBeats = [
     eyebrow: "ADOPTION SEEMS EASY",
     title: "Every driver gets one hour of training.",
     copy: "The company hires a legendary champion to train their drivers. The employees are confident that they are ready.",
-    image: "assets/race-car-classroom-v2.webp",
+    image: "assets/race-car-classroom-v3.png",
     alt: "A diverse class of delivery drivers with helmets on their desks learning from a legendary racing champion",
   },
   {
