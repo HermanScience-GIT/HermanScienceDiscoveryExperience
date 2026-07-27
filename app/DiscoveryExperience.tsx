@@ -59,6 +59,12 @@ const products = [
 
 const research = [
   {
+    value: "65%",
+    label: "largest observed task-level token-use spread",
+    detail:
+      "Observed across explanation experiments with task and output requirements held constant.",
+  },
+  {
     value: "72.8%",
     label: "maximum observed recoverable lift",
     detail:
@@ -68,11 +74,6 @@ const research = [
     value: "1,890",
     label: "personality-authored runs",
     detail: "Analyzed in the controlled token-utilization study.",
-  },
-  {
-    value: "12.8%",
-    label: "conservative token-savings estimate",
-    detail: "Quality-guarded estimate; 95% CI of 9.7% to 15.8%.",
   },
 ];
 
