@@ -302,19 +302,12 @@ export function DiscoveryExperience() {
             ))}
           </div>
           <aside className="evidence-example">
-            <div>
-              <span>MODELED EXAMPLE</span>
-              <p>
-                A typical marketing manager using AI for 15 hours a week could
-                become <strong>35% more productive</strong>, use{" "}
-                <strong>14% fewer tokens</strong>, and create{" "}
-                <strong>$20K more annual value</strong>.
-              </p>
-              <small>
-                Illustrative scenario based on adjustable assumptions—not a
-                performance guarantee.
-              </small>
-            </div>
+            <p>
+              A typical marketing manager using AI for 15 hours a week could
+              become <strong>35% more productive</strong>, use{" "}
+              <strong>14% fewer tokens</strong>, and create{" "}
+              <strong>$20K more annual value</strong>.
+            </p>
             <a
               className="button evidence-example-cta"
               href="https://gtmnow.github.io/hermanscience-prompt-cqi-roi-calculator/"
