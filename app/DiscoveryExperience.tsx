@@ -31,7 +31,7 @@ const introBeats = [
     eyebrow: "RIDE-ALONG INTELLIGENCE",
     title: "HermanScience rides with your workforce.",
     copy: "Hyper-personalized guidance helps every employee learn to direct AI while doing real work.",
-    image: "assets/race-car-finish-v5.png",
+    image: "assets/race-car-finish-v6.png",
     alt: "An employee driving a tandem Formula-style car with a guide riding behind",
   },
 ];
@@ -341,7 +341,7 @@ export function DiscoveryExperience() {
         <section className="hero" id="top">
           <img
             className="hero-background"
-            src="assets/race-car-finish-v5.png"
+            src="assets/race-car-finish-v6.png"
             alt=""
             aria-hidden="true"
           />
