@@ -574,10 +574,7 @@ export function DiscoveryExperience() {
             </a>
             <button
               className="button button-secondary"
-              onClick={() => {
-                setIntroStage(0);
-                setIntroOpen(true);
-              }}
+              onClick={replayIntro}
             >
               Replay the opening
             </button>
