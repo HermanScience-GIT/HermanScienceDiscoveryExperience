@@ -464,7 +464,7 @@ export function DiscoveryExperience() {
               </button>
               <a
                 className="button button-primary"
-                href="https://hermanengage.com/"
+                href="https://hermanengage.com/?utm_source=landing_page&utm_medium=web&utm_campaign=herman_unleashed"
                 target="_blank"
                 rel="noreferrer"
               >

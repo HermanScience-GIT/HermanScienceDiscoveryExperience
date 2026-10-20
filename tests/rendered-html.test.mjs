@@ -36,7 +36,9 @@ test("renders the HermanScience discovery experience", async () => {
   assert.match(html, /Play opening/);
   assert.match(html, /HermanEngage/);
   assert.match(html, /Start a free trial/);
-  assert.match(html, /https:\/\/hermanengage\.com\//);
+  assert.match(html, /hermanengage\.com\/\?utm_source=landing_page/);
+  assert.match(html, /utm_medium=web/);
+  assert.match(html, /utm_campaign=herman_unleashed/);
   assert.doesNotMatch(html, /COMING SOON|PRIVATE PREVIEW/);
   assert.match(html, /Prompt Challenge/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
