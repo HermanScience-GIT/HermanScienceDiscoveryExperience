@@ -442,8 +442,6 @@ export function DiscoveryExperience() {
 
         <section className="engage section" id="engage">
           <div className="engage-copy">
-            <span className="status status-coming">COMING SOON</span>
-            <span className="status">PRIVATE PREVIEW</span>
             <span className="kicker">HERMANENGAGE</span>
             <h2>Personalization that reaches beyond the prompt.</h2>
             <p>
@@ -466,9 +464,11 @@ export function DiscoveryExperience() {
               </button>
               <a
                 className="button button-primary"
-                href="mailto:admin@hermanscience.com?subject=HermanEngage%20private%20preview"
+                href="https://hermanengage.com/"
+                target="_blank"
+                rel="noreferrer"
               >
-                Request preview access
+                Start a free trial
               </a>
             </div>
           </div>
