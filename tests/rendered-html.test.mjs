@@ -30,7 +30,10 @@ test("renders the HermanScience discovery experience", async () => {
   const html = await response.text();
   assert.match(html, /HermanScience/);
   assert.match(html, /Teach them how to drive it/);
-  assert.match(html, /72\.8%/);
+  assert.match(html, /73%/);
+  assert.match(html, /hermanscience-opening-mobile\.mp4/);
+  assert.match(html, /hermanscience-opening-desktop\.mp4/);
+  assert.match(html, /Play opening film/);
   assert.match(html, /HermanEngage/);
   assert.match(html, /Prompt Challenge/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);

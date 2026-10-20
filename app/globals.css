@@ -50,46 +50,18 @@ button {
   z-index: 100;
   inset: 0;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
   min-height: 100dvh;
-  background: var(--navy);
+  background: #020810;
   color: var(--white);
 }
 
-.cinema-image {
-  position: absolute;
-  inset: -4%;
-  width: 108%;
-  height: 108%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.06);
-  transition: opacity 2.6s ease;
-}
-
-.cinema-image.is-visible {
-  opacity: 1;
-  animation: cinemaDrift 7s ease-out both;
-}
-
-.cinema-overlay {
+.cinema-video {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(1, 10, 20, 0.98) 0%, rgba(1, 10, 20, 0.78) 40%, rgba(1, 10, 20, 0.06) 78%),
-    linear-gradient(0deg, rgba(1, 10, 20, 0.76), transparent 55%);
-}
-
-.cinema-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.14;
-  background-image:
-    linear-gradient(rgba(97, 214, 255, 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(97, 214, 255, 0.16) 1px, transparent 1px);
-  background-size: 70px 70px;
-  mask-image: linear-gradient(to right, black, transparent 65%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #020810;
 }
 
 .cinema-skip {
@@ -106,15 +78,33 @@ button {
   backdrop-filter: blur(12px);
 }
 
-.cinema-copy {
-  position: relative;
-  z-index: 2;
-  width: min(760px, calc(100% - 48px));
-  margin: 0 0 9vh max(6vw, 28px);
-  animation: copyIn 1.6s ease both;
+.cinema-start-scrim {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 88px 24px 36px;
+  background: rgba(1, 8, 17, 0.64);
+  backdrop-filter: blur(7px);
 }
 
-.cinema-copy > span,
+.cinema-start-card {
+  width: min(620px, 100%);
+  padding: clamp(28px, 5vw, 54px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(4, 18, 33, 0.88);
+  text-align: center;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}
+
+.cinema-start-logo {
+  width: min(330px, 78%);
+  height: auto;
+  margin-bottom: 28px;
+}
+
+.cinema-start-card > span,
 .kicker {
   display: inline-block;
   color: var(--cyan-soft);
@@ -123,108 +113,32 @@ button {
   letter-spacing: 0.18em;
 }
 
-.cinema-copy h1 {
-  max-width: 720px;
-  margin: 18px 0 16px;
-  font-size: clamp(3rem, 6.6vw, 6.4rem);
-  line-height: 0.95;
+.cinema-start-card h1 {
+  margin: 18px 0 30px;
+  font-size: clamp(2.25rem, 5vw, 4.4rem);
+  line-height: 0.98;
   letter-spacing: -0.055em;
 }
 
-.cinema-opening-question span {
+.cinema-play {
+  min-width: min(280px, 100%);
+}
+
+.cinema-start-card p {
+  margin: 18px auto 0;
+  color: #ffb79f;
+  line-height: 1.5;
+}
+
+.cinema-continue {
   display: block;
-}
-
-.cinema-opening-question .cinema-title-accent {
-  color: var(--orange);
-}
-
-.cinema-crash-headline span {
-  display: block;
-}
-
-.cinema-crash-headline strong {
-  color: var(--orange);
-  font-weight: inherit;
-}
-
-.cinema-copy p {
-  max-width: 610px;
-  margin: 0 0 28px;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  line-height: 1.55;
-}
-
-.cinema-progress {
-  display: flex;
-  gap: 8px;
-  width: min(420px, 100%);
-  margin-bottom: 28px;
-}
-
-.cinema-progress button {
-  position: relative;
-  flex: 1;
-  height: 24px;
-  padding: 0;
+  margin: 20px auto 0;
+  padding: 4px 0;
   border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
   background: transparent;
+  color: rgba(255, 255, 255, 0.76);
   cursor: pointer;
-}
-
-.cinema-progress button::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  left: 0;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.22);
-  transform: translateY(-50%);
-  transition:
-    height 0.2s ease,
-    background 0.9s ease;
-}
-
-.cinema-progress button.complete::after {
-  background: rgba(0, 174, 239, 0.5);
-}
-
-.cinema-progress button.active::after {
-  height: 5px;
-  background: var(--cyan);
-}
-
-.cinema-progress button:hover::after,
-.cinema-progress button:focus-visible::after {
-  height: 7px;
-  background: var(--cyan-soft);
-}
-
-.cinema-progress button:focus-visible {
-  outline: 2px solid var(--white);
-  outline-offset: 2px;
-}
-
-@keyframes cinemaDrift {
-  from {
-    transform: scale(1.06) translate3d(0.8%, 0, 0);
-  }
-  to {
-    transform: scale(1.11) translate3d(-0.8%, -0.4%, 0);
-  }
-}
-
-@keyframes copyIn {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .site-header {
@@ -1211,24 +1125,26 @@ footer p {
       linear-gradient(0deg, rgba(2, 12, 24, 0.98) 0%, rgba(2, 12, 24, 0.28) 70%);
   }
 
-  .cinema-copy {
-    margin-bottom: 7vh;
-  }
-
-  .cinema-crash-headline {
-    max-width: none;
-    font-size: clamp(1.72rem, 8.7vw, 2.4rem);
-    line-height: 1;
-    letter-spacing: -0.045em;
-  }
-
-  .cinema-crash-headline span {
-    white-space: nowrap;
-  }
-
   .cinema-skip {
     right: 18px;
     top: 18px;
+  }
+
+  .cinema-start-scrim {
+    padding: 76px 16px 24px;
+  }
+
+  .cinema-start-card {
+    padding: 28px 20px;
+  }
+
+  .cinema-start-logo {
+    margin-bottom: 20px;
+  }
+
+  .cinema-start-card h1 {
+    margin-bottom: 24px;
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   .evidence-example {
@@ -1267,16 +1183,6 @@ footer p {
 
   .demo-complete div {
     display: grid;
-  }
-
-  .cinema-image {
-    object-position: 64% center;
-  }
-
-  .cinema-overlay {
-    background:
-      linear-gradient(0deg, rgba(1, 10, 20, 0.98) 0%, rgba(1, 10, 20, 0.42) 78%),
-      linear-gradient(90deg, rgba(1, 10, 20, 0.7), transparent);
   }
 
   .thesis {

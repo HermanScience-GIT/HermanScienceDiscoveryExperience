@@ -2,40 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const INTRO_STAGE_DURATION = 7000;
-
-const introBeats = [
-  {
-    eyebrow: "SPEED CHANGES EVERYTHING",
-    title: "What if every speed limit disappeared?",
-    copy: "A delivery company replaces every van with a Formula-style race car.",
-    image: "assets/race-car-start-v2.png",
-    alt: "A delivery driver holding a package beside an unexpectedly powerful Formula-style race car, with traditional delivery trucks behind him",
-  },
-  {
-    eyebrow: "ADOPTION SEEMS EASY",
-    title: "Every driver gets one hour of training.",
-    copy: "The company hires a legendary champion to train their drivers. The employees are confident that they are ready.",
-    image: "assets/race-car-classroom-v3.png",
-    alt: "A diverse class of delivery drivers with helmets on their desks learning from a legendary racing champion",
-  },
-  {
-    eyebrow: "THE HUMAN GAP",
-    title:
-      "A few deliver faster. But, unprepared for that much power, most will crash.",
-    copy: "This is how adopting AI is impacting most organizations.",
-    image: "assets/race-car-crashes.webp",
-    alt: "Formula-style cars crashed along a city street while one car crosses a distant intersection",
-  },
-  {
-    eyebrow: "RIDE-ALONG INTELLIGENCE",
-    title: "HermanScience rides with your workforce.",
-    copy: "Hyper-personalized guidance helps every employee learn to direct AI while doing real work.",
-    image: "assets/race-car-finish-v6.png",
-    alt: "An employee driving a tandem Formula-style car with a guide riding behind",
-  },
-];
-
 const products = [
   {
     name: "HermanCQI",
@@ -79,10 +45,11 @@ const research = [
 
 export function DiscoveryExperience() {
   const [introOpen, setIntroOpen] = useState(true);
-  const [introStage, setIntroStage] = useState(0);
-  const [introTimerReset, setIntroTimerReset] = useState(0);
+  const [introStarted, setIntroStarted] = useState(false);
+  const [introFailed, setIntroFailed] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [demoEnded, setDemoEnded] = useState(false);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
   const demoVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -90,24 +57,23 @@ export function DiscoveryExperience() {
       return;
     }
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-    if (reducedMotion) {
-      return;
-    }
-
-    const stageTimer = window.setTimeout(() => {
-      if (introStage < introBeats.length - 1) {
-        setIntroStage((current) => current + 1);
-      } else {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        introVideoRef.current?.pause();
         setIntroOpen(false);
       }
-    }, INTRO_STAGE_DURATION);
+    };
 
-    return () => window.clearTimeout(stageTimer);
-  }, [introOpen, introStage, introTimerReset]);
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [introOpen]);
 
   useEffect(() => {
     if (!demoOpen) {
@@ -133,14 +99,32 @@ export function DiscoveryExperience() {
     };
   }, [demoOpen]);
 
-  const closeIntro = () => setIntroOpen(false);
-  const showIntroStage = (stage: number) => {
-    setIntroStage(stage);
-    setIntroTimerReset((current) => current + 1);
+  const startIntro = async () => {
+    const video = introVideoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    setIntroFailed(false);
+    video.currentTime = 0;
+    video.muted = false;
+
+    try {
+      await video.play();
+      setIntroStarted(true);
+    } catch {
+      setIntroFailed(true);
+    }
+  };
+  const closeIntro = () => {
+    introVideoRef.current?.pause();
+    setIntroOpen(false);
   };
   const replayIntro = () => {
-    setIntroStage(0);
-    setIntroTimerReset((current) => current + 1);
+    introVideoRef.current?.pause();
+    setIntroStarted(false);
+    setIntroFailed(false);
     setIntroOpen(true);
   };
   const openDemo = () => {
@@ -167,89 +151,65 @@ export function DiscoveryExperience() {
   return (
     <>
       {introOpen && (
-        <section className="cinema" aria-label="HermanScience opening story">
-          {introBeats.map((beat, index) => (
-            <img
-              key={beat.image}
-              className={`cinema-image ${
-                introStage === index ? "is-visible" : ""
-              }`}
-              src={beat.image}
-              alt={beat.alt}
+        <section className="cinema" aria-label="HermanScience opening film">
+          <video
+            ref={introVideoRef}
+            className="cinema-video"
+            poster="assets/race-car-finish-v6.png"
+            preload="metadata"
+            playsInline
+            controls={introStarted}
+            onEnded={closeIntro}
+            onError={() => setIntroFailed(true)}
+          >
+            <source
+              src="media/hermanscience-opening-mobile.mp4"
+              type="video/mp4"
+              media="(max-width: 700px)"
             />
-          ))}
-          <div className="cinema-overlay" />
-          <div className="cinema-grid" aria-hidden="true" />
-          <button className="cinema-skip" onClick={closeIntro}>
+            <source
+              src="media/hermanscience-opening-desktop.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support embedded video.
+          </video>
+          <button className="cinema-skip" type="button" onClick={closeIntro}>
             Skip opening
           </button>
-          <div
-            className="cinema-copy"
-            key={introStage}
-            aria-live="polite"
-          >
-            <span>{introBeats[introStage].eyebrow}</span>
-            <h1
-              className={
-                introStage === 0
-                  ? "cinema-opening-question"
-                  : introStage === 2
-                    ? "cinema-crash-headline"
-                    : undefined
-              }
-              aria-label={
-                introStage === 0 || introStage === 2
-                  ? introBeats[introStage].title
-                  : undefined
-              }
-            >
-              {introStage === 0 ? (
-                <>
-                  <span>What if every</span>
-                  <span className="cinema-title-accent">speed limit</span>
-                  <span>disappeared?</span>
-                </>
-              ) : introStage === 2 ? (
-                <>
-                  <span>A few deliver faster.</span>
-                  <span>But, unprepared for</span>
-                  <span>that much power,</span>
-                  <span>
-                    most will <strong>crash</strong>.
-                  </span>
-                </>
-              ) : (
-                introBeats[introStage].title
-              )}
-            </h1>
-            <p>{introBeats[introStage].copy}</p>
-            <nav
-              className="cinema-progress"
-              aria-label="Opening story slides"
-            >
-              {introBeats.map((beat, index) => (
-                <button
-                  type="button"
-                  key={beat.eyebrow}
-                  className={
-                    index === introStage
-                      ? "active"
-                      : index < introStage
-                        ? "complete"
-                        : ""
-                  }
-                  aria-current={index === introStage ? "step" : undefined}
-                  aria-label={`Show slide ${index + 1}: ${beat.eyebrow}`}
-                  onClick={() => showIntroStage(index)}
+          {!introStarted && (
+            <div className="cinema-start-scrim">
+              <div className="cinema-start-card" aria-live="polite">
+                <img
+                  className="cinema-start-logo"
+                  src="assets/hermanscience-logo.png"
+                  alt="HermanScience"
                 />
-              ))}
-            </nav>
-            {introStage === introBeats.length - 1 && (
-              <button className="button button-primary" onClick={closeIntro}>
-                Explore HermanScience
-              </button>
-            )}
-          </div>
+                <span>OPENING FILM · SOUND ON</span>
+                <h1>See what happens when every speed limit disappears.</h1>
+                <button
+                  className="button button-primary cinema-play"
+                  type="button"
+                  onClick={startIntro}
+                  autoFocus
+                >
+                  Play opening film
+                </button>
+                {introFailed && (
+                  <p>
+                    The film could not start. Try again, or continue to the
+                    site.
+                  </p>
+                )}
+                <button
+                  className="cinema-continue"
+                  type="button"
+                  onClick={closeIntro}
+                >
+                  Continue without watching
+                </button>
+              </div>
+            </div>
+          )}
         </section>
       )}
 
