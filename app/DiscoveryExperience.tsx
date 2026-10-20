@@ -580,7 +580,7 @@ export function DiscoveryExperience() {
             </button>
             <a
               className="button button-secondary"
-              href="https://hermanscience.com/"
+              href="https://hermanscience.com/?utm_source=landing_page&utm_medium=web&utm_campaign=herman_unleashed"
               target="_blank"
               rel="noreferrer"
             >
