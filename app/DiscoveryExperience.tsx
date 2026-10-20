@@ -46,7 +46,6 @@ const research = [
 export function DiscoveryExperience() {
   const [introOpen, setIntroOpen] = useState(true);
   const [introStarted, setIntroStarted] = useState(false);
-  const [introFailed, setIntroFailed] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [demoEnded, setDemoEnded] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement>(null);
@@ -106,16 +105,13 @@ export function DiscoveryExperience() {
       return;
     }
 
-    setIntroFailed(false);
     video.currentTime = 0;
     video.muted = false;
 
     try {
       await video.play();
       setIntroStarted(true);
-    } catch {
-      setIntroFailed(true);
-    }
+    } catch {}
   };
   const closeIntro = () => {
     introVideoRef.current?.pause();
@@ -124,7 +120,6 @@ export function DiscoveryExperience() {
   const replayIntro = () => {
     introVideoRef.current?.pause();
     setIntroStarted(false);
-    setIntroFailed(false);
     setIntroOpen(true);
   };
   const openDemo = () => {
@@ -192,14 +187,8 @@ export function DiscoveryExperience() {
                   onClick={startIntro}
                   autoFocus
                 >
-                  Play opening film
+                  Play opening
                 </button>
-                {introFailed && (
-                  <p>
-                    The film could not start. Try again, or continue to the
-                    site.
-                  </p>
-                )}
                 <button
                   className="cinema-continue"
                   type="button"
